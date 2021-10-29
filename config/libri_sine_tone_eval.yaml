@@ -1,0 +1,53 @@
+# Configuration file for the experiment
+
+# Dataset used for evaluation
+data:
+  name: libri
+  outlier: sine-tone
+  freq: 20-120
+  width: 512-4096
+  batch_size: 32
+  num_batches: 25
+  num_dataloader_workers: 2
+
+# Predictors / Algorithms to evaluate
+predictors:
+
+  lnt:
+    type: lnt
+    config: ...
+    checkpoint: ...
+    pretty_name: LNT
+    show: True
+
+  thoc:
+    type: thoc
+    config: ...
+    checkpoint: ...
+    pretty_name: THOC
+    show: True
+
+  lstm:
+    type: lstm
+    config: ...
+    checkpoint: ...
+    pretty_name: LSTM
+    show: True
+
+  lof:
+    type: lof
+    config:
+    checkpoint: ...
+    pretty_name: LOF*
+    show: True
+    kwargs:
+      window_size: 160
+
+  ocsvm:
+    type: ocsvm
+    config:
+    checkpoint: ...
+    pretty_name: OC-SVM*
+    show: True
+    kwargs:
+      window_size: 160

@@ -1,0 +1,10 @@
+numpy
+pytorch
+torchaudio
+scikit-learn
+tqdm
+h5py
+pandas
+matplotlib
+pyyaml
+

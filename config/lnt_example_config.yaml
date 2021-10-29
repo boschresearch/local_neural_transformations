@@ -1,0 +1,55 @@
+# #################################
+# Configuration for Testing NeuTraL
+###################################
+dataset: swat
+device: cuda:0
+
+# Training Hyperparameters
+batch_size: 32
+learning_rate: 0.0002 #2e-4
+epochs: 1000
+window_size: 7200
+window_stride: 100
+lambda_weighting: 0.001
+
+# Model definition
+model:
+  type: neutralard
+  input_size: 45
+  enc_embedding_size: 128
+  ar_embedding_size: 32
+  n_prediction_steps: 12
+
+  downsampling_factor: 72
+
+  # (time-) convolutional CPC encoder
+  encoder:
+    filter_sizes: [3,3,4,2]
+    strides: [3,3,4,2]
+    paddings: [0,0,0,0]
+
+  neutral:
+    n_transformations: 12
+    transformation_type: multiplicative # choose from { residual, multiplicative  }
+    dcl_temperature: 0.1
+    detach: False
+    pretrain_representations_for_epochs: 30
+    mlp:
+      n_hidden: [24, 24] #
+      bias: False
+      activation: ReLU # choose from { ReLU, Sigmoid, Tanh }
+
+# Logging
+logdir: /home/cit8si/experiments/2021-08-23-lnt-swat-007
+print_every_step: 100
+validate_every_epoch: 25
+keep_checkpoint_every_epoch: 25
+
+# configure early stopping
+#early_stopping:
+#  type: no_improvement
+#  loss: validation_joint
+#  no_improvement_for_validations: 20
+
+# Other parameters
+num_dataloader_workers: 1
